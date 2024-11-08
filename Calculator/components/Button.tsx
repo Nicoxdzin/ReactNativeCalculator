@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, Dimensions } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, Dimensions, GestureResponderEvent } from "react-native";
 
 const screen = Dimensions.get("window");
 const buttonWidth = screen.width / 4;
@@ -35,7 +35,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ({ onPress, text, size, theme }) => {
+interface ButtonProps {
+  onPress: (event: GestureResponderEvent) => void;
+  text: string;
+  size?: "double";  // Tamanho pode ser "double" ou undefined
+  theme?: "secondary" | "accent";  // Tema pode ser "secondary", "accent" ou undefined
+}
+
+const Button: React.FC<ButtonProps> = ({ onPress, text, size, theme }) => {
   const buttonStyles = [styles.button];
   const textStyles = [styles.text];
 
@@ -56,3 +63,5 @@ export default ({ onPress, text, size, theme }) => {
     </TouchableOpacity>
   );
 };
+
+export default Button;
