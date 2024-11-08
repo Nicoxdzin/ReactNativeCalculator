@@ -4,7 +4,7 @@ export const initialState = {
     previousValue: null
   };
   
-  export const handleNumber = (value, state) => {
+  export const handleNumber = (value: string, state: any) => {
     if (state.currentValue === "0") {
       return { currentValue: `${value}` };
     }
@@ -14,7 +14,7 @@ export const initialState = {
     };
   };
   
-  export const handleEqual = state => {
+  export const handleEqual = (state: any) => {
     const { currentValue, previousValue, operator } = state;
   
     const current = parseFloat(currentValue);
@@ -51,11 +51,19 @@ export const initialState = {
         ...resetState
       };
     }
+
+    if (operator === "**") {
+      console.log("ola")
+      return {
+        currentValue: previous ** current,
+        ...resetState
+      };
+    }
   
     return state;
   };
   
-  const calculator = (type, value, state) => {
+  const calculator = (type: string, value: any, state: any) => {
     switch (type) {
       case "number":
         return handleNumber(value, state);
@@ -66,7 +74,8 @@ export const initialState = {
           currentValue: "0"
         };
       case "equal":
-        return handleEqual(state);
+        console.log(state)
+        return handleEqual(state);//HKJADHKAD
       case "clear":
         return initialState;
       case "posneg":
